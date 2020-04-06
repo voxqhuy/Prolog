@@ -129,3 +129,56 @@ brother(One, Another) :-
 :- assertion(\+ brother(jake, chris)).
 :- assertion(\+ sister(jean, ruck)).
 :- assertion(\+ sister(jean, stella)).
+
+% GRANDPARENT
+grandparent(Gran, Kid) :-
+    parent_of(Gran, Parent),
+    parent_of(Parent, Kid).
+
+% TESTS
+:- assertion(grandparent(jean, alex)).
+:- assertion(grandparent(ruck, alex)).
+:- assertion(grandparent(stella, alex)).
+:- assertion(grandparent(stella, fiona)).
+:- assertion(grandparent(stella, val)).
+:- assertion(grandparent(stella, andy)).
+:- assertion(grandparent(stella, jazzy)).
+:- assertion(grandparent(stella, joel)).
+:- assertion(grandparent(stella, jake)).
+:- assertion(grandparent(whit, alex)).
+:- assertion(grandparent(whit, fiona)).
+:- assertion(grandparent(whit, val)).
+:- assertion(grandparent(whit, andy)).
+:- assertion(grandparent(whit, jazzy)).
+:- assertion(grandparent(whit, joel)).
+:- assertion(grandparent(whit, jake)).
+:- assertion(grandparent(cam, chris)).
+:- assertion(\+ grandparent(alex, jean)).
+:- assertion(\+ grandparent(alex, whit)).
+:- assertion(\+ grandparent(jean, fiona)).
+:- assertion(\+ grandparent(ruck, andy)).
+:- assertion(\+ grandparent(joe, val)).
+:- assertion(\+ grandparent(whit, chris)).
+
+% GRANDKID
+grandkid(Kid, Gran) :-
+    grandparent(Gran, Kid).
+
+% TESTS
+:- assertion(grandkid(alex, jean)).
+:- assertion(grandkid(alex, ruck)).
+:- assertion(grandkid(alex, stella)).
+:- assertion(grandkid(alex, whit)).
+:- assertion(grandkid(fiona, stella)).
+:- assertion(grandkid(fiona, whit)).
+:- assertion(grandkid(val, stella)).
+:- assertion(grandkid(val, whit)).
+:- assertion(grandkid(andy, stella)).
+:- assertion(grandkid(andy, whit)).
+:- assertion(grandkid(jake, stella)).
+:- assertion(grandkid(jake, whit)).
+:- assertion(grandkid(chris, cam)).
+:- assertion(\+ grandkid(jean, alex)).
+:- assertion(\+ grandkid(whit, alex)).
+:- assertion(\+ grandkid(fiona, joe)).
+:- assertion(\+ grandkid(chris, whit)).
