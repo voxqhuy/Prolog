@@ -182,3 +182,48 @@ grandkid(Kid, Gran) :-
 :- assertion(\+ grandkid(whit, alex)).
 :- assertion(\+ grandkid(fiona, joe)).
 :- assertion(\+ grandkid(chris, whit)).
+
+% FULL_SIBLING
+full_sibling(One, Another) :-
+    parent_of(ParentA, One),
+    parent_of(ParentA, Another),
+    parent_of(ParentB, One),
+    parent_of(ParentB, Another),
+    One \== Another,
+    ParentA \== ParentB.
+
+% TESTS
+:- assertion(full_sibling(matt, ward)).
+:- assertion(full_sibling(matt, mary)).
+:- assertion(full_sibling(mary, ward)).
+:- assertion(full_sibling(ward, matt)).
+:- assertion(full_sibling(dave, myra)).
+:- assertion(full_sibling(dave, cam)).
+:- assertion(full_sibling(cam, myra)).
+:- assertion(full_sibling(fiona, val)).
+:- assertion(full_sibling(val, fiona)).
+:- assertion(full_sibling(andy, jazzy)).
+:- assertion(full_sibling(andy, joel)).
+:- assertion(full_sibling(joel, jazzy)).
+:- assertion(\+ full_sibling(alex, fiona)).
+:- assertion(\+ full_sibling(fiona, andy)).
+:- assertion(\+ full_sibling(jake, andy)).
+:- assertion(\+ full_sibling(jake, jazzy)).
+:- assertion(\+ full_sibling(jake, joel)).
+
+% STEPSON
+stepson(Stepson, Parent) :-
+    male(Stepson),
+      not(parent_of(Parent, Stepson)),
+    parent_of(Parent, BioChild),
+    brother(Stepson, BioChild).
+
+% TESTS
+:- assertion(stepson(jake, jessie)).
+:- assertion(\+ stepson(jessie, jake)).
+:- assertion(\+ stepson(jake, cam)).
+:- assertion(\+ stepson(jake, myra)).
+:- assertion(\+ stepson(jake, whit)).
+:- assertion(\+ stepson(joel, jessie)).
+:- assertion(\+ stepson(alex, mary)).
+:- assertion(\+ stepson(jake, ward)).
